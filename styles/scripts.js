@@ -137,7 +137,7 @@ var app = angular.module("app", ["firebase"]);
            function levelExistsCallback(newLevel) {
             console.log("Deciding what message to give")
               if ($scope.checkPass === false) {
-                alert('Level "' + newLevel + '"" was not added. No duplicates!');
+                alert('Level "' + newLevel + '"" was NOT added. No duplicates!');
               } else {
                 $scope.unplayedLevels.$add({ name: $scope.name, level: $scope.newLevel });
                 alert('Level "' + newLevel + '"" has been submitted!');
