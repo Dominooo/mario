@@ -1,1 +1,166 @@
-Hello World
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+	<title>	</title>
+	<link rel="stylesheet" type="text/css" href="styles/main.css">
+	<link href='https://fonts.googleapis.com/css?family=Ubuntu:400,700,500,300' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Lato:400,100,300,700,900' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/1.0.0/angularfire.min.js"></script>
+    <script src="styles/scripts.js"></script>
+</head>
+<body ng-controller="ctrl">
+
+<header class="navigation" role="banner">
+  <div class="navigation-wrapper">
+    <a href="javascript:void(0)" class="logo">
+      <img src="http://i.imgur.com/9ReCCDh.png" alt="PlayerOneTrent Image">
+    </a>
+    <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">MENU</a>
+    <nav role="navigation">
+      <ul id="js-navigation-menu" class="navigation-menu show">
+        <li class="nav-link"><a href="https://twitter.com/playeronetrent">@PlayerOneTrent</a></li>
+        <li class="nav-link"><a href="http://t.co/furdMQ9obp">twitch.tv/PlayerOneTrent</a></li>
+        <li class="nav-link more"><a href="javascript:void(0)">Schedule</a>
+          <ul class="submenus">
+            <li><a href="http://www.thetimezoneconverter.com/?t=5:00%20pm&tz=Salt%20Lake%20City&">Tuesday: 5:00 PM - 8:00 PM MST</a></li>
+            <li><a href="http://www.thetimezoneconverter.com/?t=5:00%20pm&tz=Salt%20Lake%20City&">Wednesday: 5:00 PM - 8:00 PM MST</a></li>
+            <li><a href="http://www.thetimezoneconverter.com/?t=5:00%20pm&tz=Salt%20Lake%20City&">Thursday: 5:00 PM - 8:00 PM MST</a></li>
+          </ul>
+        </li>
+        <li class="nav-link">
+	        <div class="modal">
+			  <label for="modal-1">
+			    <div class="modal-trigger">Login</div>
+			  </label>
+			  <input class="modal-state" id="modal-1" type="checkbox" />
+			  <div class="modal-fade-screen">
+			    <div class="modal-inner">
+			      <div class="modal-close" for="modal-1"></div>
+			      	<div class="modal-citizen">
+				      <h1>Trent's admin panel</h1>
+				      <input ng-model="$scope.email" type="email" placeholder="email">
+				      <input ng-model="$scope.password" type="password" placeholder="password">
+			    	</div>
+			    </div>
+			  </div>
+			</div>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="mario-wrapper">
+
+<h1 class="tagline">Submit your level?</h1>
+
+<input ng-model="name" type="text" class="submit-name" placeholder="Name">
+
+<div class="level-wrap">
+	<div class="inputs"><input ng-model="levelPiece1" type="text" id="input1" auto-tab-to="input2" maxlength="4" placeholder="0000"/></div>
+	<div class="dash">-</div>
+	<div class="inputs"><input ng-model="levelPiece2" type="text" id="input2" auto-tab-to="input3" maxlength="4" placeholder="0000"/></div>
+	<div class="dash">-</div>
+	<div class="inputs"><input ng-model="levelPiece3" type="text" id="input3" auto-tab-to="input4" maxlength="4" placeholder="0000"/></div>
+	<div class="dash">-</div>
+	<div class="inputs"><input ng-model="levelPiece4" type="text" id="input4" auto-tab-to="submit" maxlength="4" placeholder="0000"/></div>
+</div>
+<div class="submit-wrap">
+	<button ng-click="addLevel()">Submit</button>
+</div>
+
+<div class="temp-box">
+<!--<iframe src="http://www.twitch.tv/playeronetrent/embed" frameborder="0" scrolling="no" height="378" width="620"></iframe>-->
+<!--<br /><button ng-click="getRandom()">get Random</button><br />
+<strong>{{ displayRandomLevel.name }}</strong>
+      {{ displayRandomLevel.level }}-->
+</div>
+</div>
+
+<div class="trentio">
+	<img src="http://i.imgur.com/XRoZbbv.png">
+</div>
+
+<div class="full-width">
+
+<div class="content-lock">
+
+<div class="accordion-holders">
+	<ul class="accordion">
+	  <li>
+	    <a href="javascript:void(0)" class="js-accordion-trigger">Unplayed Levels <i class="fa fa-chevron-down"></i></a>
+	    <ul class="submenu submitted-levels" id="submitted-levels">
+	      	<li ng-repeat="level in unplayedLevels">
+          		<a href="javascript:void(0)"><strong id="{{ level.level }}" class="submitted">{{ level.name}}</strong><br />{{ level.level }}</a>
+        	</li>
+	    </ul>
+	  </li>
+	</ul>
+</div>
+
+<div class="accordion-holders">
+	<ul class="accordion">
+	  <li>
+	    <a href="javascript:void(0)" class="js-accordion-trigger">Played Levels <i class="fa fa-chevron-down"></i></a>
+	    <ul class="submenu played-levels" id="played-levels">
+	      	<li ng-repeat="level in playedLevels">
+          		<a href="javascript:void(0)"><strong id="{{ level.level }}" class="submitted">{{ level.name}}</strong><br />{{ level.level }}</a>
+        	</li>
+	    </ul>
+	  </li>
+	</ul>
+</div>
+
+</div> 
+
+</div>
+
+
+<script type="text/javascript">
+		$(document).ready(function() {
+
+	  var menuToggle = $('#js-mobile-menu').unbind();
+	  $('#js-navigation-menu').removeClass("show");
+
+	  menuToggle.on('click', function(e) {
+	    e.preventDefault();
+	    $('#js-navigation-menu').slideToggle(function(){
+	      if($('#js-navigation-menu').is(':hidden')) {
+	        $('#js-navigation-menu').removeAttr('style');
+	      }
+	    });
+	  });
+	});
+
+$('.js-accordion-trigger').bind('click', function(e){
+  jQuery(this).parent().find('.submenu').slideToggle('fast');  // apply the toggle to the ul
+  jQuery(this).parent().toggleClass('is-expanded');
+  e.preventDefault();
+});
+
+$(function() {
+  $("#modal-1").on("change", function() {
+    if ($(this).is(":checked")) {
+      $("body").addClass("modal-open");
+    } else {
+      $("body").removeClass("modal-open");
+    }
+  });
+
+  $(".modal-fade-screen, .modal-close").on("click", function() {
+    $(".modal-state:checked").prop("checked", false).change();
+  });
+
+  $(".modal-inner").on("click", function(e) {
+    e.stopPropagation();
+  });
+});
+
+</script>
+
+</body>
+</html>
