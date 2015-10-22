@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html ng-app="app">
 <head>
-	<title>	</title>
-	<link rel="stylesheet" type="text/css" href="styles/main.css">
-	<link href='https://fonts.googleapis.com/css?family=Ubuntu:400,700,500,300' rel='stylesheet' type='text/css'>
-	<link href='https://fonts.googleapis.com/css?family=Lato:400,100,300,700,900' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+  <title>Hello World</title>
+  <link rel="stylesheet" type="text/css" href="styles/main.css">
+  <link href='https://fonts.googleapis.com/css?family=Ubuntu:400,700,500,300' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,100,300,700,900' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>
     <script src="https://cdn.firebase.com/libs/angularfire/1.0.0/angularfire.min.js"></script>
@@ -32,22 +32,22 @@
           </ul>
         </li>
         <li class="nav-link">
-	        <div class="modal">
-			  <label for="modal-1">
-			    <div class="modal-trigger">Login</div>
-			  </label>
-			  <input class="modal-state" id="modal-1" type="checkbox" />
-			  <div class="modal-fade-screen">
-			    <div class="modal-inner">
-			      <div class="modal-close" for="modal-1"></div>
-			      	<div class="modal-citizen">
-				      <h1>Trent's admin panel</h1>
-				      <input ng-model="$scope.email" type="email" placeholder="email">
-				      <input ng-model="$scope.password" type="password" placeholder="password">
-			    	</div>
-			    </div>
-			  </div>
-			</div>
+          <div class="modal">
+        <label for="modal-1">
+          <div class="modal-trigger">Login</div>
+        </label>
+        <input class="modal-state" id="modal-1" type="checkbox" />
+        <div class="modal-fade-screen">
+          <div class="modal-inner">
+            <div class="modal-close" for="modal-1"></div>
+              <div class="modal-citizen">
+              <h1>Trent's admin panel</h1>
+              <input ng-model="$scope.email" type="email" placeholder="email">
+              <input ng-model="$scope.password" type="password" placeholder="password">
+            </div>
+          </div>
+        </div>
+      </div>
         </li>
       </ul>
     </nav>
@@ -61,16 +61,16 @@
 <input ng-model="name" type="text" class="submit-name" placeholder="Name">
 
 <div class="level-wrap">
-	<div class="inputs"><input ng-model="levelPiece1" type="text" id="input1" auto-tab-to="input2" maxlength="4" placeholder="0000"/></div>
-	<div class="dash">-</div>
-	<div class="inputs"><input ng-model="levelPiece2" type="text" id="input2" auto-tab-to="input3" maxlength="4" placeholder="0000"/></div>
-	<div class="dash">-</div>
-	<div class="inputs"><input ng-model="levelPiece3" type="text" id="input3" auto-tab-to="input4" maxlength="4" placeholder="0000"/></div>
-	<div class="dash">-</div>
-	<div class="inputs"><input ng-model="levelPiece4" type="text" id="input4" auto-tab-to="submit" maxlength="4" placeholder="0000"/></div>
+  <div class="inputs"><input ng-model="levelPiece1" type="text" id="input1" auto-tab-to="input2" maxlength="4" placeholder="0000"/></div>
+  <div class="dash">-</div>
+  <div class="inputs"><input ng-model="levelPiece2" type="text" id="input2" auto-tab-to="input3" maxlength="4" placeholder="0000"/></div>
+  <div class="dash">-</div>
+  <div class="inputs"><input ng-model="levelPiece3" type="text" id="input3" auto-tab-to="input4" maxlength="4" placeholder="0000"/></div>
+  <div class="dash">-</div>
+  <div class="inputs"><input ng-model="levelPiece4" type="text" id="input4" auto-tab-to="submit" maxlength="4" placeholder="0000"/></div>
 </div>
 <div class="submit-wrap">
-	<button ng-click="addLevel()">Submit</button>
+  <button ng-click="addLevel()">Submit</button>
 </div>
 
 <div class="temp-box">
@@ -82,7 +82,7 @@
 </div>
 
 <div class="trentio">
-	<img src="http://i.imgur.com/XRoZbbv.png">
+  <img src="http://i.imgur.com/XRoZbbv.png">
 </div>
 
 <div class="full-width">
@@ -90,29 +90,29 @@
 <div class="content-lock">
 
 <div class="accordion-holders">
-	<ul class="accordion">
-	  <li>
-	    <a href="javascript:void(0)" class="js-accordion-trigger">Unplayed Levels <i class="fa fa-chevron-down"></i></a>
-	    <ul class="submenu submitted-levels" id="submitted-levels">
-	      	<li ng-repeat="level in unplayedLevels">
-          		<a href="javascript:void(0)"><strong id="{{ level.level }}" class="submitted">{{ level.name}}</strong><br />{{ level.level }}</a>
-        	</li>
-	    </ul>
-	  </li>
-	</ul>
+  <ul class="accordion">
+    <li>
+      <a href="javascript:void(0)" class="js-accordion-trigger">Unplayed Levels <i class="fa fa-chevron-down"></i></a>
+      <ul class="submenu submitted-levels" id="submitted-levels">
+          <li ng-repeat="level in unplayedLevels">
+              <a href="javascript:void(0)"><strong id="{{ level.level }}" class="submitted">{{ level.name}}</strong><br />{{ level.level }}</a>
+          </li>
+      </ul>
+    </li>
+  </ul>
 </div>
 
 <div class="accordion-holders">
-	<ul class="accordion">
-	  <li>
-	    <a href="javascript:void(0)" class="js-accordion-trigger">Played Levels <i class="fa fa-chevron-down"></i></a>
-	    <ul class="submenu played-levels" id="played-levels">
-	      	<li ng-repeat="level in playedLevels">
-          		<a href="javascript:void(0)"><strong id="{{ level.level }}" class="submitted">{{ level.name}}</strong><br />{{ level.level }}</a>
-        	</li>
-	    </ul>
-	  </li>
-	</ul>
+  <ul class="accordion">
+    <li>
+      <a href="javascript:void(0)" class="js-accordion-trigger">Played Levels <i class="fa fa-chevron-down"></i></a>
+      <ul class="submenu played-levels" id="played-levels">
+          <li ng-repeat="level in playedLevels">
+              <a href="javascript:void(0)"><strong id="{{ level.level }}" class="submitted">{{ level.name}}</strong><br />{{ level.level }}</a>
+          </li>
+      </ul>
+    </li>
+  </ul>
 </div>
 
 </div> 
@@ -121,20 +121,20 @@
 
 
 <script type="text/javascript">
-		$(document).ready(function() {
+    $(document).ready(function() {
 
-	  var menuToggle = $('#js-mobile-menu').unbind();
-	  $('#js-navigation-menu').removeClass("show");
+    var menuToggle = $('#js-mobile-menu').unbind();
+    $('#js-navigation-menu').removeClass("show");
 
-	  menuToggle.on('click', function(e) {
-	    e.preventDefault();
-	    $('#js-navigation-menu').slideToggle(function(){
-	      if($('#js-navigation-menu').is(':hidden')) {
-	        $('#js-navigation-menu').removeAttr('style');
-	      }
-	    });
-	  });
-	});
+    menuToggle.on('click', function(e) {
+      e.preventDefault();
+      $('#js-navigation-menu').slideToggle(function(){
+        if($('#js-navigation-menu').is(':hidden')) {
+          $('#js-navigation-menu').removeAttr('style');
+        }
+      });
+    });
+  });
 
 $('.js-accordion-trigger').bind('click', function(e){
   jQuery(this).parent().find('.submenu').slideToggle('fast');  // apply the toggle to the ul
