@@ -138,7 +138,7 @@ var app = angular.module("app", ["firebase"]);
             console.log("Deciding what message to give")
               if ($scope.checkPass === false) {
                 alert('Level "' + newLevel + '"" was not added. No duplicates!');
-                $scope.checkPass = true;
+                
               } else {
                 $scope.unplayedLevels.$add({ name: $scope.name, level: $scope.newLevel });
                 alert('Level "' + newLevel + '"" has been submitted!');
@@ -147,7 +147,7 @@ var app = angular.module("app", ["firebase"]);
                 $scope.levelPiece2 = "";
                 $scope.levelPiece3 = "";
                 $scope.levelPiece4 = "";
-                $scope.checkPass = true;
+                
               }
             }   
             
