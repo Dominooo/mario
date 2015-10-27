@@ -545,42 +545,42 @@ header.navigation {
   margin-bottom: -50px;
   margin-top: -50px; }
 
-.full-width {
+.full-width, .full-width-admin {
   width: 100%;
   background-color: #fad139;
   min-height: 300px; }
-  .full-width .content-lock {
+  .full-width .content-lock, .full-width-admin .content-lock {
     max-width: 68em;
     margin-left: auto;
     margin-right: auto;
     padding-top: 50px; }
-    .full-width .content-lock::after {
+    .full-width .content-lock::after, .full-width-admin .content-lock::after {
       clear: both;
       content: "";
       display: table; }
-  .full-width .accordion-holders {
+  .full-width .accordion-holders, .full-width-admin .accordion-holders {
     float: left;
     display: block;
     margin-right: 2.35765%;
     width: 100%;
     margin-bottom: 10px; }
-    .full-width .accordion-holders:last-child {
+    .full-width .accordion-holders:last-child, .full-width-admin .accordion-holders:last-child {
       margin-right: 0; }
     @media screen and (min-width: 640px) {
-      .full-width .accordion-holders {
+      .full-width .accordion-holders, .full-width-admin .accordion-holders {
         float: left;
         display: block;
         margin-right: 2.35765%;
         width: 48.82117%; }
-        .full-width .accordion-holders:last-child {
+        .full-width .accordion-holders:last-child, .full-width-admin .accordion-holders:last-child {
           margin-right: 0; } }
-  .full-width .js-accordion-trigger {
+  .full-width .js-accordion-trigger, .full-width-admin .js-accordion-trigger {
     text-align: center;
     background-color: #333;
     color: #aaa; }
-    .full-width .js-accordion-trigger:hover {
+    .full-width .js-accordion-trigger:hover, .full-width-admin .js-accordion-trigger:hover {
       color: #fff; }
-    .full-width .js-accordion-trigger .fa {
+    .full-width .js-accordion-trigger .fa, .full-width-admin .js-accordion-trigger .fa {
       float: right;
       font-size: 2em;
       margin-top: -5px; }
@@ -762,5 +762,68 @@ header.navigation {
     width: 100%; }
     .modal-citizen input:last-child {
       margin-right: 0; }
+
+.full-width-admin {
+  background-color: #00ff00;
+  min-height: 1000px; }
+
+.shown-level {
+  min-height: 300px;
+  font-size: 4em;
+  text-align: center;
+  font-family: 'Ubuntu', sans-serif;
+  color: black;
+  -webkit-text-fill-color: white;
+  /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black; }
+
+.secret-button {
+  background-color: #00f400;
+  font-size: 1.5em;
+  border: 0;
+  color: #00ff00;
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 82.94039%;
+  margin-left: 8.5298%; }
+  .secret-button:last-child {
+    margin-right: 0; }
+
+.triple-holders {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 100%;
+  padding: 10px; }
+  .triple-holders:last-child {
+    margin-right: 0; }
+  @media screen and (min-width: 640px) {
+    .triple-holders {
+      float: left;
+      display: block;
+      margin-right: 2.35765%;
+      width: 31.76157%; }
+      .triple-holders:last-child {
+        margin-right: 0; } }
+  .triple-holders button:hover, .triple-holders button:focus {
+    border: 0;
+    background-color: #00f400;
+    color: #fff;
+    -webkit-text-fill-color: white;
+    /* Will override color (regardless of order) */
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black; }
+  .triple-holders button:active {
+    background-color: #00f400;
+    font-size: 1.5em;
+    border: 0 !important;
+    color: #00ff00; }
+  .triple-holders button:focus {
+    background-color: #00f400;
+    font-size: 1.5em;
+    border: 0 !important;
+    color: #00ff00; }
 
 /*# sourceMappingURL=main.css.map */
