@@ -489,7 +489,7 @@ header.navigation {
 
 // full width
 
-.full-width {
+.full-width, .full-width-admin {
   width: 100%;
   background-color: #fad139;
   min-height: 300px;
@@ -509,6 +509,8 @@ header.navigation {
 
   }
 
+
+
   .js-accordion-trigger {
     text-align: center;
     background-color: #333;
@@ -524,7 +526,6 @@ header.navigation {
   }
 
 }
-
 
 
 
@@ -779,3 +780,73 @@ header.navigation {
 
 
 //end modal
+
+
+
+// admin
+
+.full-width-admin {
+    background-color: #00ff00;
+    //background-color: #7F9A65;
+    min-height: 1000px;
+  }
+
+
+.shown-level {
+  min-height: 300px;
+  font-size: 4em;
+  text-align: center;
+  font-family: 'Ubuntu', sans-serif;
+  color: black;
+   -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+   -webkit-text-stroke-width: 2px;
+   -webkit-text-stroke-color: black;
+}
+
+.secret-button {
+  background-color: #00f400;
+  font-size: 1.5em;
+  border: 0;
+  color: #00ff00;
+  @include span-columns(10);
+  @include shift(1);
+
+}
+
+.triple-holders {
+  @include span-columns(12);
+  padding: 10px;
+
+  @include media($tablet-tall) {
+      @include span-columns(4);
+    }
+
+    button {
+      &:hover, &:focus {
+    border: 0;
+    background-color: #00f400;
+    color: #fff;
+   -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+   -webkit-text-stroke-width: 1px;
+   -webkit-text-stroke-color: black;
+
+  }
+
+  &:active {
+    background-color: #00f400;
+    font-size: 1.5em;
+    border: 0!important;
+    color: #00ff00;
+  }
+
+    &:focus {
+    background-color: #00f400;
+    font-size: 1.5em;
+    border: 0!important;
+    color: #00ff00;
+  }
+    }
+}
+
+
+// end admin

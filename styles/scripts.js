@@ -1,5 +1,6 @@
 var app = angular.module("app", ["firebase"]);
 
+
       app.directive('autoTabTo', [function () {
         return {
             restrict: "A",
@@ -17,9 +18,14 @@ var app = angular.module("app", ["firebase"]);
 
 
 
+
+ 
+
       app.controller("ctrl", ["$scope", "$firebaseArray",
         function($scope, $firebaseArray) {
           
+          $scope.test = "test";
+
           var unplayedRef = new Firebase("https://mariomaker.firebaseio.com/trent/unplayed");
           $scope.unplayedLevels = $firebaseArray(unplayedRef);
           
@@ -27,16 +33,98 @@ var app = angular.module("app", ["firebase"]);
           $scope.playedLevels = $firebaseArray(playedRef);
           
 
-
+          // AUTH STUFF
           
+          
+          $scope.email = "";
+          $scope.password = "";
+          
+
+
+
+          $scope.logging = function() {
+            console.log("You pressed submit");
+            var ref = new Firebase("https://mariomaker.firebaseio.com");
+            ref.authWithPassword({
+              email    : $scope.email.toString(),
+              password : $scope.password.toString()
+            }, function(error, authData) {
+              if (error) {
+                console.log("Login Failed!", error);
+              } else {
+                console.log("Authenticated successfully with payload:", authData);
+                $scope.refresh();
+              }
+            });
+          }
+
+
+
+
+          var authRef = new Firebase("https://mariomaker.firebaseio.com/.info/authenticated");
+          authRef.on("value", function(snap) {
+            if (snap.val() === true) {
+              
+              $scope.loggedin = true;
+              $scope.loggedout = false;
+              //location.href = 'admin.html';
+              console.log("authenticated");
+
+            } else {
+              console.log("not authenticated");
+              $scope.loggedin = false;
+              $scope.loggedout = true;
+
+            }
+          });
+
+          $scope.adminCheckRandom = function() {
+
+            if ($scope.loggedin === true) {
+              $scope.getRandom();
+            }
+
+            else {
+              window.location.href = 'index.html';
+            }
+
+          };
+
+          $scope.adminCheckDelete = function() {
+            if ($scope.loggedin === true) {
+              $scope.dangerDelete();
+            }
+
+            else {
+              window.location.href = 'index.html';
+            }
+          };
+
+
+          $scope.refresh = function() {
+            window.location.href = 'index.html';
+          }
+
+
+          $scope.logout = function() {
+            var ref = new Firebase("https://mariomaker.firebaseio.com");
+            ref.unauth();
+            window.location.href = 'index.html';
+          };
+
+            // END AUTH STUFF
+
           //ADD NEW LEVEL METHOD
           $scope.addLevel = function(e) {
-          $scope.newLevel = $scope.levelPiece1.toUpperCase() + " - " +  $scope.levelPiece2.toUpperCase()  + " - " + $scope.levelPiece3.toUpperCase()  + " - " + $scope.levelPiece4.toUpperCase();
-          $scope.newLevel = $scope.newLevel.toString();
-          $scope.checkPass = true;
 
+          
             //WHEN SUBMIT IS PRESSED
             if ($scope.name && $scope.levelPiece2 == 0000 && $scope.levelPiece1.length == 4 && $scope.levelPiece2.length == 4 && $scope.levelPiece3.length == 4 && $scope.levelPiece4.length == 4) {
+              
+            $scope.newLevel = $scope.levelPiece1.toUpperCase() + " - " +  $scope.levelPiece2.toUpperCase()  + " - " + $scope.levelPiece3.toUpperCase()  + " - " + $scope.levelPiece4.toUpperCase();
+            $scope.newLevel = $scope.newLevel.toString();
+            $scope.checkPass = true;
+
               console.log("scope.newLevel is " + $scope.newLevel);
               makeArrays();
             }
@@ -46,8 +134,6 @@ var app = angular.module("app", ["firebase"]);
             }
             
           };
-
-
 
 
             //Populate arrays to check against later
@@ -169,12 +255,28 @@ var app = angular.module("app", ["firebase"]);
             });
             
           };
+
+
+          // Scary delete button
+          $scope.dangerDelete = function() {
+            $scope.unplayedLevels.$loaded().then(function(unplayedLevels) {
+               
+               for (var i = 0; i < $scope.unplayedLevels.length; i++) {
+                  $scope.unplayedLevels.$remove(unplayedLevels[i]);
+               }
+               
+               
+            });
+            
+          };
+
+
+
           
-          
-          // MAKE SURE YOU CANT ADD A LEVEL THAT ALREADY EXISTS
-          
-          
-          
+          // cute wombat test
+          $scope.wombat = function() {
+            console.log("wombat");
+          };
 
           
           
