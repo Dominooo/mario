@@ -32,6 +32,9 @@ var app = angular.module("app", ["firebase"]);
           var playedRef = new Firebase ("https://mariomaker.firebaseio.com/trent/played");
           $scope.playedLevels = $firebaseArray(playedRef);
           
+          var currentRef = new Firebase ("https://mariomaker.firebaseio.com/trent/current");
+          $scope.currentLevel = $firebaseArray(currentRef);
+          
 
           // AUTH STUFF
           
@@ -100,6 +103,56 @@ var app = angular.module("app", ["firebase"]);
             }
           };
 
+          $scope.adminCheckPutBack = function() {
+            if ($scope.loggedin === true) {
+              $scope.putBack();
+            }
+
+            else {
+              window.location.href = 'index.html';
+            }
+          }
+
+          $scope.adminCheckWinner = function() {
+            if ($scope.loggedin === true) {
+              $scope.winner();
+            }
+
+            else {
+              window.location.href = 'index.html';
+            }
+          }
+
+          $scope.adminCheckLoser = function() {
+            if ($scope.loggedin === true) {
+              $scope.loser();
+            }
+
+            else {
+              window.location.href = 'index.html';
+            }
+          }
+
+          $scope.adminCheckSelectUnplayed = function(fireid) {
+            if ($scope.loggedin === true) {
+              $scope.selectUnplayed(fireid);
+            }
+
+            else {
+              window.location.href = 'index.html';
+            }
+          }
+
+          $scope.adminCheckSelectPlayed = function(fireid) {
+            if ($scope.loggedin === true) {
+              $scope.selectPlayed(fireid);
+            }
+
+            else {
+              window.location.href = 'index.html';
+            }
+          }
+          
 
           $scope.refresh = function() {
             window.location.href = 'index.html';
@@ -227,7 +280,7 @@ var app = angular.module("app", ["firebase"]);
                 alert('Level "' + newLevel + '"" was NOT added. No duplicates!');
 
               } else {
-                $scope.unplayedLevels.$add({ name: $scope.name, level: $scope.newLevel });
+                $scope.unplayedLevels.$add({ name: $scope.name, level: $scope.newLevel, beat: 'not yet' });
                 alert('Level "' + newLevel + '"" has been submitted!');
                 //RESET LEVEL BOXES
                 $scope.levelPiece1 = "";
@@ -237,26 +290,155 @@ var app = angular.module("app", ["firebase"]);
               }
             }   
             
+
             
 
-          
-          
           // GET A RANDOM LEVEL
+          $scope.randomLock = false;
           
           $scope.getRandom = function() {
-            $scope.unplayedLevels.$loaded().then(function(unplayedLevels) {
-               var randomNum = Math.floor((Math.random() * unplayedLevels.length));
-               console.log(randomNum);
-               var randomLevel = unplayedLevels[randomNum];
-               $scope.displayRandomLevel = randomLevel;
-               console.log(randomLevel);
-               
-               $scope.playedLevels.$add(randomLevel);
-               $scope.unplayedLevels.$remove(randomLevel);
-               
-            });
+
+            if ($scope.randomLock === false){
+
+              $scope.unplayedLevels.$loaded().then(function(unplayedLevels) {
+                 var randomNum = Math.floor((Math.random() * unplayedLevels.length));
+                 console.log(randomNum);
+                 var randomLevel = unplayedLevels[randomNum];
+                 $scope.displayCurrentLevel = randomLevel;
+                 console.log(randomLevel);
+                 
+                 $scope.randomLock = true;
+
+                 $scope.currentLevel.$add(randomLevel);
+                 $scope.unplayedLevels.$remove(randomLevel);
+
+                 //$scope.playedLevels.$add(randomLevel);
+                 
+                 
+              });
             
+            } else  {
+
+              alert('there was a problem generating a level')
+              
+            } 
+
           };
+
+          // select an unplayed level
+          $scope.selectUnplayed = function(fireid){
+            console.log('random lock is ' + $scope.randomLock)
+            if ($scope.randomLock === false){
+              console.log('outside the id is' + fireid)
+              $scope.unplayedLevels.$loaded().then(function(unplayedLevels) {
+                console.log('inside the id is' + fireid)
+                 var thisRecord = unplayedLevels.$getRecord(fireid);
+                  console.log('this record is' + thisRecord)
+                    $scope.currentLevel.$add(thisRecord);
+                    $scope.unplayedLevels.$remove(thisRecord);
+                    $scope.randomLock = true;
+            });
+
+            } else  {
+
+              alert('there was a problem selecting an unplayed level')
+              
+            } 
+          }
+
+          // select a played level
+          $scope.selectPlayed = function(fireid){
+            console.log('random lock is ' + $scope.randomLock)
+            if ($scope.randomLock === false){
+              console.log('outside the id is' + fireid)
+              $scope.playedLevels.$loaded().then(function(playedLevels) {
+                console.log('inside the id is' + fireid)
+                 var thisRecord = playedLevels.$getRecord(fireid);
+                  console.log('this record is' + thisRecord)
+                    $scope.currentLevel.$add(thisRecord);
+                    $scope.playedLevels.$remove(thisRecord);
+                    $scope.randomLock = true;
+            });
+
+            } else  {
+
+              alert('there was a problem selecting a played level')
+              
+            } 
+          }
+
+
+          // MAYBE YOU WANT TO PUT THAT RANDOM LEVEL BACK TO UNPLAYED
+          $scope.putBack = function() {
+            $scope.randomLock = true;
+            console.log('randomLock in putBack is' + $scope.randomLock);
+              if ($scope.randomLock === true) {
+                $scope.currentLevel.$loaded().then(function(currentLevel) {
+                  console.log(currentLevel[0]);
+                  $scope.unplayedLevels.$add(currentLevel[0]);
+                  $scope.currentLevel.$remove(currentLevel[0]);
+                  $scope.randomLock = false;
+                  console.log($scope.displayCurrentLevel);
+                  });
+                } else {
+                  alert('there was a problem putting it back')
+                }
+
+          }
+
+          // Maybe you refreshed the page. Need to know current level
+
+
+          // IF YOU WON THE LEVEL
+          $scope.winner = function() {
+
+            if ($scope.randomLock === true) {
+              $scope.currentLevel.$loaded().then(function(currentLevel) {
+                  console.log(currentLevel[0].beat);
+                  currentLevel[0].beat = "check green";
+                  console.log(currentLevel[0].beat);
+                  $scope.playedLevels.$add(currentLevel[0]);
+                  $scope.currentLevel.$remove(currentLevel[0]);
+                  $scope.randomLock = false;
+                  $scope.displayCurrentLevel = {
+                    name: '',
+                    level: ''
+                  };
+                  console.log($scope.displayCurrentLevel);
+                  });
+
+            } else {
+              alert('No current level is selected. Therefore you cannot win.')
+            }
+          }
+
+
+
+
+          // IF YOU LOST THE LEVEL
+          $scope.loser = function() {
+
+            if ($scope.randomLock === true) {
+              $scope.currentLevel.$loaded().then(function(currentLevel) {
+                  console.log(currentLevel[0].beat);
+                  currentLevel[0].beat = "times red";
+                  console.log(currentLevel[0].beat);
+                  $scope.playedLevels.$add(currentLevel[0]);
+                  $scope.currentLevel.$remove(currentLevel[0]);
+                  $scope.randomLock = false;
+                  $scope.displayCurrentLevel = {
+                    name: '',
+                    level: ''
+                  };
+                  console.log($scope.displayCurrentLevel);
+                  });
+
+            } else {
+              alert('No current level is selected. Therefore you cannot lose.')
+            }
+          }
+
+
 
 
           // Scary delete button
@@ -272,6 +454,13 @@ var app = angular.module("app", ["firebase"]);
             
           };
 
+          $scope.promptDelete = function() {
+            var sure = prompt("Are you sure you want to delete all unplayed levels? Type YES below if so.");
+
+            if (sure === "YES") {
+              $scope.adminCheckDelete();
+            }
+          }
 
 
           

@@ -605,6 +605,27 @@ header.navigation {
   }
 }
 
+
+.admin-accordion {
+  border: none;
+  
+  .admin-page {
+    background-color: #00f400;
+    color: #00FF00;
+    font-size: 2em;
+
+    &:hover, &:focus {
+    border: 0;
+    background-color: #00f400;
+    color: #fff;
+   -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+   -webkit-text-stroke-width: 1px;
+   -webkit-text-stroke-color: black;
+    }
+  }
+
+}
+
 // end full width
 
 //modal
@@ -781,7 +802,13 @@ header.navigation {
 
 //end modal
 
+.green {
+  color: #458B00;
+}
 
+.red {
+  color: #b20000;
+}
 
 // admin
 
@@ -819,6 +846,7 @@ header.navigation {
 
   @include media($tablet-tall) {
       @include span-columns(4);
+      @include omega(4n);
     }
 
     button {

@@ -68,7 +68,7 @@
 
 <h1 class="tagline">Submit your level?</h1>
 
-<input ng-model="name" type="text" class="submit-name" placeholder="Name">
+<input ng-model="name" type="text" class="submit-name" placeholder="Your Name" maxlength="25">
 
 <div class="level-wrap">
   <div class="inputs"><input ng-model="levelPiece1" type="text" id="input1" auto-tab-to="input2" maxlength="4" placeholder="0000"/></div>
@@ -112,7 +112,7 @@
       <a href="javascript:void(0)" class="js-accordion-trigger">Played Levels <i class="fa fa-chevron-down"></i></a>
       <ul class="submenu played-levels" id="played-levels">
           <li ng-repeat="level in playedLevels">
-              <a href="javascript:void(0)"><strong id="{{ level.level }}" class="submitted">{{ level.name}}</strong><br />{{ level.level }}</a>
+              <a href="javascript:void(0)"><strong id="{{ level.level }}" class="submitted"><i class="fa fa-{{ level.beat }}"></i> {{ level.name}}</strong><br />{{ level.level }}</a>
           </li>
       </ul>
     </li>

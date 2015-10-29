@@ -621,6 +621,21 @@ header.navigation {
     display: block;
     padding-bottom: 0; }
 
+.admin-accordion {
+  border: none; }
+  .admin-accordion .admin-page {
+    background-color: #00f400;
+    color: #00FF00;
+    font-size: 2em; }
+    .admin-accordion .admin-page:hover, .admin-accordion .admin-page:focus {
+      border: 0;
+      background-color: #00f400;
+      color: #fff;
+      -webkit-text-fill-color: white;
+      /* Will override color (regardless of order) */
+      -webkit-text-stroke-width: 1px;
+      -webkit-text-stroke-color: black; }
+
 .modal label {
   cursor: pointer;
   margin-bottom: 0; }
@@ -763,6 +778,12 @@ header.navigation {
     .modal-citizen input:last-child {
       margin-right: 0; }
 
+.green {
+  color: #458B00; }
+
+.red {
+  color: #b20000; }
+
 .full-width-admin {
   background-color: #00ff00;
   min-height: 1000px; }
@@ -806,7 +827,11 @@ header.navigation {
       margin-right: 2.35765%;
       width: 31.76157%; }
       .triple-holders:last-child {
-        margin-right: 0; } }
+        margin-right: 0; }
+      .triple-holders:nth-child(4n) {
+        margin-right: 0; }
+      .triple-holders:nth-child(4n+1) {
+        clear: left; } }
   .triple-holders button:hover, .triple-holders button:focus {
     border: 0;
     background-color: #00f400;
